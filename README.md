@@ -33,3 +33,4 @@ This example contains following files:
 ghc -c fibonacci.hs
 ghc -no-hs-main fib.c fibonacci.o -o fib
 ```
+

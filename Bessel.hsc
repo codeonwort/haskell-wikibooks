@@ -6,8 +6,18 @@ import Foreign
 import Foreign.Ptr
 import Foreign.C.String
 import Foreign.C.Types
+import System.IO.Unsafe
 
 #include <gsl/gsl_sf_result.h>
+
+foreign import ccall unsafe "gsl/gsl_bessel.h gsl_sf_bessel_Jn_e"
+    c_besselJn :: CInt -> CDouble -> Ptr GslSfResult -> IO CInt
+
+foreign import ccall unsafe "gsl/gsl_errno.h gsl_set_error_handler_off"
+    c_deactivate_gsl_error_handler :: IO ()
+
+foreign import ccall unsafe "gsl/gsl_errno.h gsl_strerror"
+    c_error_string :: CInt -> IO CString
 
 data GslSfResult = GslSfResult {
     gsl_value :: CDouble,
